@@ -11,7 +11,7 @@ public class HeroInputController : MonoBehaviour
 
 	private void Awake()
 	{
-		_physics.OnIsGroundedValueChanged += () => { IsJumpPressed = false; };
+		_physics.IsGroundedValueChanged += OnIsGroundedValueChanged;
 	}
 
 	private void Update()
@@ -22,5 +22,15 @@ public class HeroInputController : MonoBehaviour
 		}
 
 		HAxisValue = Input.GetAxis(HorizontalAxisName);
+	}
+
+	private void OnDestroy()
+	{
+		_physics.IsGroundedValueChanged -= OnIsGroundedValueChanged;
+	}
+
+	private void OnIsGroundedValueChanged()
+	{
+		IsJumpPressed = false;
 	}
 }

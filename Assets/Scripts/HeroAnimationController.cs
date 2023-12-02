@@ -5,16 +5,16 @@ public class HeroAnimationController : MonoBehaviour
 	private static readonly int IsRun = Animator.StringToHash("IsRun");
 	private static readonly int IsGrounded = Animator.StringToHash("IsGrounded");
 	private static readonly int Jump = Animator.StringToHash("Jump");
+	private static readonly int AirSpeed = Animator.StringToHash("AirSpeed");
 
 	[SerializeField] private Animator _animator;
 	[SerializeField] private HeroInputController _input;
 	[SerializeField] private HeroPhysicsController _physics;
 	[SerializeField] private SpriteRenderer _renderer;
-	private static readonly int AirSpeed = Animator.StringToHash("AirSpeed");
 
 	private void Awake()
 	{
-		_physics.OnIsGroundedValueChanged += () => { _animator.SetBool(IsGrounded, _physics.IsGrounded); };
+		_physics.IsGroundedValueChanged += OnIsGroundedValueChanged;
 	}
 
 	private void Update()
@@ -27,5 +27,15 @@ public class HeroAnimationController : MonoBehaviour
 		{
 			_animator.SetTrigger(Jump);
 		}
+	}
+
+	private void OnDestroy()
+	{
+		_physics.IsGroundedValueChanged -= OnIsGroundedValueChanged;
+	}
+
+	private void OnIsGroundedValueChanged()
+	{
+		_animator.SetBool(IsGrounded, _physics.IsGrounded);
 	}
 }

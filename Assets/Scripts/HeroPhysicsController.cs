@@ -10,7 +10,7 @@ public class HeroPhysicsController : MonoBehaviour
 
 	private bool _isGrounded;
 
-	public UnityAction OnIsGroundedValueChanged;
+	public UnityAction IsGroundedValueChanged;
 
 	public float AirSpeed => _circleBody.velocity.y;
 
@@ -25,7 +25,7 @@ public class HeroPhysicsController : MonoBehaviour
 			}
 
 			_isGrounded = value;
-			OnIsGroundedValueChanged.Invoke();
+			IsGroundedValueChanged.Invoke();
 		}
 	}
 
