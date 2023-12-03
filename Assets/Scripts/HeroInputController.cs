@@ -16,6 +16,7 @@ public class HeroInputController : MonoBehaviour
 
 	private void Update()
 	{
+		// TODO: refactor it with new input system
 		if (Input.GetKeyDown(KeyCode.Space) && _physics.IsGrounded)
 		{
 			IsJumpPressed = true;
