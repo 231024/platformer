@@ -12,7 +12,10 @@ public class MainMenuTweener : MonoBehaviour
 	[SerializeField] private float _offscreen;
 	[SerializeField] private float _animationTime;
 
-	public UnityAction MenuHideAnimationComplete; 
+	public UnityAction DefaultButtonClicked;
+	public UnityAction MenuHideAnimationComplete;
+	public UnityAction MuteButtonCLicked;
+	public UnityAction NoSoundButtonClicked;
 
 	private void Awake()
 	{
@@ -65,5 +68,20 @@ public class MainMenuTweener : MonoBehaviour
 	public void OnContinueGameClick()
 	{
 		Hide();
+	}
+
+	public void OnMuteClick()
+	{
+		MuteButtonCLicked.Invoke();
+	}
+
+	public void OnNoSoundClick()
+	{
+		NoSoundButtonClicked.Invoke();
+	}
+
+	public void OnDefaultClick()
+	{
+		DefaultButtonClicked.Invoke();
 	}
 }
