@@ -1,9 +1,8 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class HeroInputController : MonoBehaviour
+public class HeroInputHandler : MonoBehaviour
 {
-	private const string HorizontalAxisName = "Horizontal";
-
 	[SerializeField] private HeroPhysicsController _physics;
 
 	public float HAxisValue { get; private set; }
@@ -14,17 +13,6 @@ public class HeroInputController : MonoBehaviour
 		_physics.IsGroundedValueChanged += OnIsGroundedValueChanged;
 	}
 
-	private void Update()
-	{
-		// TODO: refactor it with new input system
-		if (Input.GetKeyDown(KeyCode.Space) && _physics.IsGrounded)
-		{
-			IsJumpPressed = true;
-		}
-
-		HAxisValue = Input.GetAxis(HorizontalAxisName);
-	}
-
 	private void OnDestroy()
 	{
 		_physics.IsGroundedValueChanged -= OnIsGroundedValueChanged;
@@ -33,5 +21,18 @@ public class HeroInputController : MonoBehaviour
 	private void OnIsGroundedValueChanged()
 	{
 		IsJumpPressed = false;
+	}
+
+	public void OnMove(InputAction.CallbackContext context)
+	{
+		HAxisValue = context.ReadValue<Vector2>().x;
+	}
+
+	public void OnJump(InputAction.CallbackContext context)
+	{
+		if (context.performed && _physics.IsGrounded)
+		{
+			IsJumpPressed = true;
+		}
 	}
 }

@@ -5,7 +5,7 @@ using UnityEngine.Events;
 public class HeroPhysicsController : MonoBehaviour
 {
 	[SerializeField] private Rigidbody2D _circleBody;
-	[SerializeField] private HeroInputController _input;
+	[SerializeField] private HeroInputHandler _input;
 	[SerializeField] private float _speed;
 	[SerializeField] private float _jumpHeight;
 

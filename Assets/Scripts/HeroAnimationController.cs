@@ -9,7 +9,7 @@ public class HeroAnimationController : MonoBehaviour
 	private static readonly int AirSpeed = Animator.StringToHash("AirSpeed");
 
 	[SerializeField] private Animator _animator;
-	[SerializeField] private HeroInputController _input;
+	[SerializeField] private HeroInputHandler _input;
 	[SerializeField] private HeroPhysicsController _physics;
 	[SerializeField] private SpriteRenderer _renderer;
 
