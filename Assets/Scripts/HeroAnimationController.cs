@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 
 public class HeroAnimationController : MonoBehaviour
@@ -15,6 +16,7 @@ public class HeroAnimationController : MonoBehaviour
 	private void Awake()
 	{
 		_physics.IsGroundedValueChanged += OnIsGroundedValueChanged;
+		
 	}
 
 	private void Update()
