@@ -1,4 +1,3 @@
-using DG.Tweening;
 using UnityEngine;
 
 public class HeroAnimationController : MonoBehaviour
@@ -16,14 +15,21 @@ public class HeroAnimationController : MonoBehaviour
 	private void Awake()
 	{
 		_physics.IsGroundedValueChanged += OnIsGroundedValueChanged;
-		
 	}
 
 	private void Update()
 	{
 		_animator.SetFloat(AirSpeed, _physics.AirSpeed);
 		_animator.SetBool(IsRun, Mathf.Abs(_input.HAxisValue) > float.Epsilon);
-		_renderer.flipX = _input.HAxisValue < 0.0f;
+
+		if (_input.HAxisValue > 0.0f)
+		{
+			_renderer.flipX = false;
+		}
+		else if (_input.HAxisValue < 0.0f)
+		{
+			_renderer.flipX = true;
+		}
 
 		if (_input.IsJumpPressed)
 		{
