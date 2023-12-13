@@ -32,22 +32,23 @@ public class SettingsController : MonoBehaviour
 
 	private void OnNoSoundButtonClicked()
 	{
-		_mixer.FindSnapshot(NoSoundSnapshotName).TransitionTo(0.0f);
-		PlayerPrefs.SetString(PrefsSnapshotKeyName, NoSoundSnapshotName);
-		PlayerPrefs.Save();
+		SetSnapshotAndSave(NoSoundSnapshotName);
 	}
 
 	private void OnMuteButtonCLicked()
 	{
-		_mixer.FindSnapshot(MuteSnapshotName).TransitionTo(0.0f);
-		PlayerPrefs.SetString(PrefsSnapshotKeyName, MuteSnapshotName);
-		PlayerPrefs.Save();
+		SetSnapshotAndSave(MuteSnapshotName);
 	}
 
 	private void OnDefaultButtonClicked()
 	{
-		_mixer.FindSnapshot(DefaultSnapshotName).TransitionTo(0.0f);
-		PlayerPrefs.SetString(PrefsSnapshotKeyName, DefaultSnapshotName);
+		SetSnapshotAndSave(DefaultSnapshotName);
+	}
+
+	private void SetSnapshotAndSave(string snapshotName)
+	{
+		_mixer.FindSnapshot(snapshotName).TransitionTo(0.0f);
+		PlayerPrefs.SetString(PrefsSnapshotKeyName, snapshotName);
 		PlayerPrefs.Save();
 	}
 }
