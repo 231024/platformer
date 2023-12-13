@@ -19,48 +19,37 @@ public class MainMenuTweener : MonoBehaviour
 
 	private void Awake()
 	{
+		_continueButton.DOMove(new Vector3(-_offscreen, _continueButton.position.y, _continueButton.position.z), 0);
+		_creditsButton.DOMove(new Vector3(_creditsButton.position.x, Screen.height + _offscreen, _creditsButton.position.z), 0);
+		_newGameButton.DOMove(new Vector3(-_offscreen, _newGameButton.position.y, _newGameButton.position.z), 0);
+		_settingsButton.DOMove(new Vector3(Screen.width + _offscreen, _settingsButton.position.y, _settingsButton.position.z), 0);
+		_exitButton.DOMove(new Vector3(_exitButton.position.x, -_offscreen, _exitButton.position.z), 0);
+
 		Show();
 	}
 
 	private void Show()
 	{
-		var newGamePos = _newGameButton.position;
-		var continuePos = _continueButton.position;
-		var creditsPos = _creditsButton.position;
-		var exitPos = _exitButton.position;
-		var settingsPos = _settingsButton.position;
-
 		var seq = DOTween.Sequence();
-		seq.Append(_newGameButton.DOMove(new Vector3(newGamePos.x - _offscreen, newGamePos.y, newGamePos.z), 0));
-		seq.Join(_continueButton.DOMove(new Vector3(continuePos.x - _offscreen, continuePos.y, continuePos.z), 0));
-		seq.Join(_creditsButton.DOMove(new Vector3(creditsPos.x, creditsPos.y + _offscreen, creditsPos.z), 0));
-		seq.Join(_exitButton.DOMove(new Vector3(exitPos.x, exitPos.y - _offscreen, exitPos.z), 0));
-		seq.Join(_settingsButton.DOMove(new Vector3(settingsPos.x + _offscreen, settingsPos.y, settingsPos.z), 0));
-		seq.Append(_newGameButton.DOMove(newGamePos, _animationTime));
-		seq.Append(_continueButton.DOMove(continuePos, _animationTime));
-		seq.Append(_creditsButton.DOMove(creditsPos, _animationTime));
-		seq.Append(_exitButton.DOMove(exitPos, _animationTime));
-		seq.Append(_settingsButton.DOMove(settingsPos, _animationTime));
+		seq.Append(_continueButton.DOMove(_continueButton.position, _animationTime));
+		seq.Append(_creditsButton.DOMove(_creditsButton.position, _animationTime));
+		seq.Append(_newGameButton.DOMove(_newGameButton.position, _animationTime));
+		seq.Append(_settingsButton.DOMove(_settingsButton.position, _animationTime));
+		seq.Append(_exitButton.DOMove(_exitButton.position, _animationTime));
 	}
 
 	private void Hide()
 	{
-		var newGamePos = _newGameButton.position;
-		var continuePos = _continueButton.position;
-		var creditsPos = _creditsButton.position;
-		var exitPos = _exitButton.position;
-		var settingsPos = _settingsButton.position;
-
 		var seq = DOTween.Sequence();
-		seq.Append(_newGameButton.DOMove(new Vector3(newGamePos.x - _offscreen, newGamePos.y, newGamePos.z),
+		seq.Append(_exitButton.DOMove(new Vector3(_exitButton.position.x, -_offscreen, _exitButton.position.z),
 			_animationTime));
-		seq.Append(_continueButton.DOMove(new Vector3(continuePos.x - _offscreen, continuePos.y, continuePos.z),
+		seq.Append(_settingsButton.DOMove(new Vector3(Screen.width + _offscreen, _settingsButton.position.y, _settingsButton.position.z),
 			_animationTime));
-		seq.Append(_creditsButton.DOMove(new Vector3(creditsPos.x, creditsPos.y + _offscreen, creditsPos.z),
+		seq.Append(_newGameButton.DOMove(new Vector3(-_offscreen, _newGameButton.position.y, _newGameButton.position.z),
 			_animationTime));
-		seq.Append(_exitButton.DOMove(new Vector3(exitPos.x, exitPos.y - _offscreen, exitPos.z),
+		seq.Append(_creditsButton.DOMove(new Vector3(_creditsButton.position.x, Screen.height + _offscreen, _creditsButton.position.z),
 			_animationTime));
-		seq.Append(_settingsButton.DOMove(new Vector3(settingsPos.x + _offscreen, settingsPos.y, settingsPos.z),
+		seq.Append(_continueButton.DOMove(new Vector3(-_offscreen, _continueButton.position.y, _continueButton.position.z),
 			_animationTime));
 		seq.AppendCallback(MenuHideAnimationComplete.Invoke);
 	}
