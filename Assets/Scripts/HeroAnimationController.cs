@@ -11,6 +11,7 @@ public class HeroAnimationController : MonoBehaviour
 	[SerializeField] private HeroInputHandler _input;
 	[SerializeField] private HeroPhysicsController _physics;
 	[SerializeField] private SpriteRenderer _renderer;
+	[SerializeField] private ParticleSystem _particles;
 
 	private void Awake()
 	{
@@ -34,6 +35,7 @@ public class HeroAnimationController : MonoBehaviour
 		if (_input.IsJumpPressed)
 		{
 			_animator.SetTrigger(Jump);
+			_particles.Play();
 		}
 	}
 
