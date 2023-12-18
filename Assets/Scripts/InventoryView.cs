@@ -18,7 +18,6 @@ public class InventoryView : MonoBehaviour
 	{
 		_cells.Clear();
 		var applesCount = _inventoryController.ApplesCount;
-		Debug.LogError($"count = {applesCount}");
 
 		for (var i = 0; i < _inventoryController.MaxItemCount; i++)
 		{
@@ -31,7 +30,6 @@ public class InventoryView : MonoBehaviour
 
 	public void OnItemClick()
 	{
-		Debug.LogError("on item click");
 		_inventoryController.EatApple();
 	}
 }
