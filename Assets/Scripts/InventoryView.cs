@@ -12,11 +12,25 @@ public class InventoryView : MonoBehaviour
 	private void OnEnable()
 	{
 		Fill();
+		_inventoryController.OnAppleEat += Refresh;
+	}
+
+	private void OnDisable()
+	{
+		_inventoryController.OnAppleEat -= Refresh;
+	}
+
+	private void Clear()
+	{
+		foreach (Transform child in _parentGrid.transform)
+			Destroy(child.gameObject);
+
+		_cells.Clear();
 	}
 
 	private void Fill()
 	{
-		_cells.Clear();
+		Clear();
 		var applesCount = _inventoryController.ApplesCount;
 
 		for (var i = 0; i < _inventoryController.MaxItemCount; i++)
@@ -28,8 +42,20 @@ public class InventoryView : MonoBehaviour
 		}
 	}
 
+	private void Refresh()
+	{
+		var applesCount = _inventoryController.ApplesCount;
+		for (var i = 0; i < _inventoryController.MaxItemCount; i++)
+			_cells[i].SetState(applesCount > i);
+	}
+
 	public void OnItemClick()
 	{
 		_inventoryController.EatApple();
+	}
+
+	public void OnCloseClick()
+	{
+		gameObject.SetActive(false);
 	}
 }
