@@ -38,7 +38,11 @@ public class HealthBandit : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        DecreaseHealth(10.0f);
-        PlayHurthAnimation();
+        if (other.gameObject.GetComponent<Damage>())
+        {
+            DecreaseHealth(other.gameObject.GetComponent<Damage>().amountDamage1);
+            PlayHurthAnimation();
+        }
+       
     }
 }

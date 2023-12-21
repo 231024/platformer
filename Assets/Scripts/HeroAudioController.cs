@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class HeroAudioController : MonoBehaviour
 {
@@ -6,6 +7,7 @@ public class HeroAudioController : MonoBehaviour
 	[SerializeField] private HeroPhysicsController _physics;
 
 	[SerializeField] private AudioSource _stepAudio;
+	[SerializeField] private AudioSource _hitAudio;
 
 	private void Update()
 	{
@@ -16,6 +18,11 @@ public class HeroAudioController : MonoBehaviour
 		else if (_input.HAxisValue == 0.0f)
 		{
 			_stepAudio.Pause();
+		}
+
+		if (Keyboard.current.fKey.isPressed)
+		{
+			_hitAudio.Play();
 		}
 	}
 }
