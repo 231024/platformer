@@ -9,13 +9,13 @@ public class SettingsController : MonoBehaviour
 	private const string DefaultSnapshotName = "Default";
 
 	[SerializeField] private AudioMixer _mixer;
-	[SerializeField] private MainMenuTweener _mainMenu;
+	[SerializeField] private SettingsMenu _settings;
 
 	private void Start()
 	{
-		_mainMenu.DefaultButtonClicked += OnDefaultButtonClicked;
-		_mainMenu.NoSoundButtonClicked += OnNoSoundButtonClicked;
-		_mainMenu.MuteButtonCLicked += OnMuteButtonCLicked;
+		_settings.DefaultButtonClicked += OnDefaultButtonClicked;
+		_settings.NoSoundButtonClicked += OnNoSoundButtonClicked;
+		_settings.MuteButtonCLicked += OnMuteButtonCLicked;
 
 		if (PlayerPrefs.HasKey(PrefsSnapshotKeyName))
 		{
@@ -25,9 +25,9 @@ public class SettingsController : MonoBehaviour
 
 	private void OnDestroy()
 	{
-		_mainMenu.DefaultButtonClicked -= OnDefaultButtonClicked;
-		_mainMenu.NoSoundButtonClicked -= OnNoSoundButtonClicked;
-		_mainMenu.MuteButtonCLicked -= OnMuteButtonCLicked;
+		_settings.DefaultButtonClicked -= OnDefaultButtonClicked;
+		_settings.NoSoundButtonClicked -= OnNoSoundButtonClicked;
+		_settings.MuteButtonCLicked -= OnMuteButtonCLicked;
 	}
 
 	private void OnNoSoundButtonClicked()

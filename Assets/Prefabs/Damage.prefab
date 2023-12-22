@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5225885138804801473}
-  - component: {fileID: 8169585623846237523}
   - component: {fileID: 6311498794777416306}
-  m_Layer: 0
+  - component: {fileID: 9175361448248443031}
+  m_Layer: 10
   m_Name: Damage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26,15 +26,29 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5451528461192221041}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.51000214, y: 0.63, z: 0}
   m_LocalScale: {x: 1.1553516, y: 1.1553516, z: 1.1553516}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &8169585623846237523
-CircleCollider2D:
+--- !u!114 &6311498794777416306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5451528461192221041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82e5ed6894de94180a33013721932bb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amountDamage: 10
+  _hitAnimation: {fileID: 7400000, guid: 0bafac48b1090284da2048c29bc986ff, type: 2}
+--- !u!70 &9175361448248443031
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -65,19 +79,6 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
---- !u!114 &6311498794777416306
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5451528461192221041}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82e5ed6894de94180a33013721932bb6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  amountDamage: 0
+  m_Offset: {x: 0.21087849, y: 0.23930661}
+  m_Size: {x: 1.3269894, y: 1.1374283}
+  m_Direction: 1

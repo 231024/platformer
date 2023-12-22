@@ -12,12 +12,12 @@ public class InventoryView : MonoBehaviour
 	private void OnEnable()
 	{
 		Fill();
-		_inventoryController.OnAppleEat += Refresh;
+		_inventoryController.ApplesCountChanged += Refresh;
 	}
 
 	private void OnDisable()
 	{
-		_inventoryController.OnAppleEat -= Refresh;
+		_inventoryController.ApplesCountChanged -= Refresh;
 	}
 
 	private void Clear()

@@ -1,32 +1,36 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using Random = UnityEngine.Random;
 
 public class InventoryController : MonoBehaviour
 {
-	public int ApplesCount => _applesCount;
-	public UnityAction OnAppleEat;
+	public int ApplesCount => _apples.Count;
+	public UnityAction ApplesCountChanged;
+	public UnityAction<int> OnAppleEat;
 
-	private int _applesCount;
+	private List<AppleTweener> _apples = new();
 	public int MaxItemCount => 10;
-
-	private void Awake()
+	public void AddApples(AppleTweener apple)
 	{
-		_applesCount = Random.Range(0, MaxItemCount);
-	}
-
-	public void AddApples(int count)
-	{
-		var applesToAdd = Math.Min(count, MaxItemCount - _applesCount);
-		_applesCount += applesToAdd;
+		if (_apples.Count >= MaxItemCount)
+		{
+			return;
+		}
+		_apples.Add(apple);
+		ApplesCountChanged?.Invoke();
 	}
 
 	public void EatApple()
 	{
-		if (_applesCount > 0)
-			_applesCount--;
-
-		OnAppleEat?.Invoke();
+		if (_apples.Count <= 0)
+		{
+			return;
+		}
+		
+		var hp = _apples[0].HealthAmount;
+		_apples.RemoveAt(0);
+		ApplesCountChanged?.Invoke();
+		OnAppleEat?.Invoke(hp);
 	}
 }

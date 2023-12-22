@@ -5,21 +5,10 @@ public class TweenerController : MonoBehaviour
 {
 	[SerializeField] private Transform _bird;
 	[SerializeField] private Transform _target;
-	[SerializeField] private MainMenuTweener _mainMenu;
 
 	private void Awake()
 	{
 		DOTween.Init();
-		_mainMenu.MenuHideAnimationComplete += OnMenuHideAnimationComplete;
-	}
-
-	private void OnDestroy()
-	{
-		_mainMenu.MenuHideAnimationComplete -= OnMenuHideAnimationComplete;
-	}
-
-	private void OnMenuHideAnimationComplete()
-	{
 		StartBirdFlight();
 	}
 

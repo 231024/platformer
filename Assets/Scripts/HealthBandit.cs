@@ -38,11 +38,11 @@ public class HealthBandit : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.GetComponent<Damage>())
+        if (other.gameObject.GetComponentInChildren<Damage>() != null)
         {
-            DecreaseHealth(other.gameObject.GetComponent<Damage>().amountDamage1);
+            DecreaseHealth(other.gameObject.GetComponentInChildren<Damage>().AmountDamage);
             PlayHurthAnimation();
+            Destroy(other.gameObject.GetComponentInChildren<Damage>().gameObject);
         }
-       
     }
 }

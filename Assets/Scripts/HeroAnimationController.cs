@@ -20,6 +20,8 @@ public class HeroAnimationController : MonoBehaviour
 	[SerializeField] private Damage _damage;
 	public UnityAction IsDamageObjectInstantiated;
 
+	public bool IsRunning => _animator.GetBool(IsRun);
+
 	private void Awake()
 	{
 		_physics.IsGroundedValueChanged += OnIsGroundedValueChanged;
@@ -44,7 +46,6 @@ public class HeroAnimationController : MonoBehaviour
 		if (_input.IsJumpPressed)
 		{
 			_animator.SetTrigger(Jump);
-			_particles.Play();
 		}
 
 		if (_input.IsAttackPressed)
@@ -62,6 +63,11 @@ public class HeroAnimationController : MonoBehaviour
 
 	private void OnIsGroundedValueChanged()
 	{
+		if (_physics.IsGrounded)
+		{
+			_particles.Play();
+		}
+
 		_animator.SetBool(IsGrounded, _physics.IsGrounded);
 	}
 }

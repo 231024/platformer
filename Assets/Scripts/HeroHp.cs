@@ -73,7 +73,9 @@ public class HeroHp : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        DecreaseHp(5);
-
+        if (collision.gameObject.GetComponent<Damage>())
+        {
+            DecreaseHp(5);
+        }
     }
 }
