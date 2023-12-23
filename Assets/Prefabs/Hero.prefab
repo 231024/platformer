@@ -99,6 +99,7 @@ GameObject:
   - component: {fileID: 8714969824211535597}
   - component: {fileID: 102270148273625432}
   - component: {fileID: 7166895261237066987}
+  - component: {fileID: 248237214700666155}
   - component: {fileID: 463668899035261619}
   - component: {fileID: 4795031296706442076}
   m_Layer: 6
@@ -580,6 +581,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 5f7bc6bc-b97d-4ec7-9ed2-4dc0c0f9f1da
     m_ActionName: Player/Jump[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 248237214700666155}
+        m_TargetAssemblyTypeName: HeroInteractor, Assembly-CSharp
+        m_MethodName: OnInteract
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 15878e72-ad70-4c96-bda0-e4b9ea78b9ff
+    m_ActionName: Player/Interact[/Keyboard/f]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -634,6 +651,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _physics: {fileID: 8714969824211535597}
   _animation: {fileID: 102270148273625432}
+--- !u!114 &248237214700666155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1015681188568320679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7be9f3e86e50442eca98163bb8695ecf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _physics: {fileID: 8714969824211535597}
 --- !u!114 &463668899035261619
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -662,8 +692,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9db11286b1162b4a8c52ab52876080d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heroMaxHp: 100
-  inventoryController: {fileID: 0}
+  _heroMaxHp: 100
+  _inventoryController: {fileID: 0}
 --- !u!1 &2836300169742945334
 GameObject:
   m_ObjectHideFlags: 0

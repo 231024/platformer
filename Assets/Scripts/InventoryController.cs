@@ -1,22 +1,22 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class InventoryController : MonoBehaviour
 {
-	public int ApplesCount => _apples.Count;
+	private readonly List<Apple> _apples = new();
 	public UnityAction ApplesCountChanged;
 	public UnityAction<int> OnAppleEat;
-
-	private List<AppleTweener> _apples = new();
+	public int ApplesCount => _apples.Count;
 	public int MaxItemCount => 10;
-	public void AddApples(AppleTweener apple)
+
+	public void AddApples(Apple apple)
 	{
 		if (_apples.Count >= MaxItemCount)
 		{
 			return;
 		}
+
 		_apples.Add(apple);
 		ApplesCountChanged?.Invoke();
 	}
@@ -27,7 +27,7 @@ public class InventoryController : MonoBehaviour
 		{
 			return;
 		}
-		
+
 		var hp = _apples[0].HealthAmount;
 		_apples.RemoveAt(0);
 		ApplesCountChanged?.Invoke();

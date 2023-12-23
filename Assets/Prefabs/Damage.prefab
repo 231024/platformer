@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82e5ed6894de94180a33013721932bb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amountDamage: 10
+  _amountDamage: 5
   _hitAnimation: {fileID: 7400000, guid: 0bafac48b1090284da2048c29bc986ff, type: 2}
 --- !u!70 &9175361448248443031
 CapsuleCollider2D:

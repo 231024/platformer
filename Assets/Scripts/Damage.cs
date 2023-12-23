@@ -1,18 +1,14 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class Damage : MonoBehaviour
 {
-    [SerializeField] private float amountDamage;
-    [SerializeField] private AnimationClip _hitAnimation;
+	[SerializeField] private float _amountDamage;
+	[SerializeField] private AnimationClip _hitAnimation;
 
-    public float AmountDamage => amountDamage;
+	public float AmountDamage => _amountDamage;
 
-    void Start()
-    {
-        Destroy(gameObject, _hitAnimation.length);
-    }
+	private void Start()
+	{
+		Destroy(gameObject, _hitAnimation.length);
+	}
 }

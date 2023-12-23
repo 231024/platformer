@@ -1,81 +1,74 @@
-
 using UnityEngine;
 
 public class HeroHp : MonoBehaviour
 {
-    [SerializeField] private int heroMaxHp;
-    [SerializeField] private InventoryController inventoryController;
-    private const string heroHpKey = "HeroHpKey";
-    private int currentHp;
+	private const string HeroHpKey = "HeroHpKey";
 
-    private void Awake()
-    {
-         currentHp = GetPlayerPrefs(heroHpKey);
-       
-    }
-    private void OnEnable()
-    {
-        inventoryController.OnAppleEat += IncreaseHp;
-    }
+	[SerializeField] private int _heroMaxHp;
+	[SerializeField] private InventoryController _inventoryController;
 
-    private void IncreaseHp()
-    {
-        IncreaseHp(10);
-    }
+	private int _currentHp;
 
-    private void OnDestroy()
-    {
-        inventoryController.OnAppleEat -= IncreaseHp;
-    }
+	private void Awake()
+	{
+		_currentHp = GetPlayerPrefs(HeroHpKey);
+	}
 
-    private void IncreaseHp(int value)
-    {
-        currentHp += value;
+	private void OnEnable()
+	{
+		_inventoryController.OnAppleEat += IncreaseHp;
+	}
 
-        if (currentHp >= heroMaxHp)
-        {
-            currentHp = heroMaxHp;
-        }
+	private void OnDestroy()
+	{
+		_inventoryController.OnAppleEat -= IncreaseHp;
+	}
 
-        SavePlayerPrefs(heroHpKey, currentHp);
-    }
+	private void OnCollisionEnter2D(Collision2D collision)
+	{
+		if (collision.gameObject.GetComponent<Damage>())
+		{
+			DecreaseHp(5);
+		}
+	}
 
-    private void DecreaseHp(int value)
-    {
-        currentHp -= value;
+	private void IncreaseHp()
+	{
+		IncreaseHp(10);
+	}
 
-        if (currentHp <= 0)
-        {
-            currentHp = 0;
-        }
+	private void IncreaseHp(int value)
+	{
+		_currentHp += value;
 
-        SavePlayerPrefs(heroHpKey, currentHp);
-    }
+		if (_currentHp >= _heroMaxHp)
+		{
+			_currentHp = _heroMaxHp;
+		}
 
-    private void SavePlayerPrefs(string key, int value)
-    {
-        PlayerPrefs.SetInt(key, value);
-        PlayerPrefs.Save();
-    }
+		SavePlayerPrefs(HeroHpKey, _currentHp);
+	}
 
-    private int GetPlayerPrefs(string key)
-    {
-        if (PlayerPrefs.HasKey(key))
-        {
-            return PlayerPrefs.GetInt(key);
-        }
+	private void DecreaseHp(int value)
+	{
+		_currentHp -= value;
 
-        else
-        {
-            return heroMaxHp;
-        }    
-    }
+		if (_currentHp <= 0)
+		{
+			_currentHp = 0;
+		}
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.GetComponent<Damage>())
-        {
-            DecreaseHp(5);
-        }
-    }
+		SavePlayerPrefs(HeroHpKey, _currentHp);
+	}
+
+	private void SavePlayerPrefs(string key, int value)
+	{
+		PlayerPrefs.SetInt(key, value);
+		PlayerPrefs.Save();
+	}
+
+	private int GetPlayerPrefs(string key)
+	{
+		return PlayerPrefs.HasKey(key) ? PlayerPrefs.GetInt(key) : _heroMaxHp;
+	}
 }

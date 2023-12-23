@@ -7,7 +7,7 @@ public class InventoryView : MonoBehaviour
 	[SerializeField] private CellItemView _inventoryCell;
 	[SerializeField] private GameObject _parentGrid;
 
-	private List<CellItemView> _cells = new();
+	private readonly List<CellItemView> _cells = new();
 
 	private void OnEnable()
 	{
@@ -23,7 +23,9 @@ public class InventoryView : MonoBehaviour
 	private void Clear()
 	{
 		foreach (Transform child in _parentGrid.transform)
+		{
 			Destroy(child.gameObject);
+		}
 
 		_cells.Clear();
 	}
@@ -46,7 +48,9 @@ public class InventoryView : MonoBehaviour
 	{
 		var applesCount = _inventoryController.ApplesCount;
 		for (var i = 0; i < _inventoryController.MaxItemCount; i++)
+		{
 			_cells[i].SetState(applesCount > i);
+		}
 	}
 
 	public void OnItemClick()

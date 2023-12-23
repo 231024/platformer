@@ -29,6 +29,8 @@ public class HeroPhysicsController : MonoBehaviour
 		}
 	}
 
+	public InteractableObject Interactable { get; private set; }
+
 	private void FixedUpdate()
 	{
 		_circleBody.velocity = new Vector2(_input.HAxisValue * _speed, _circleBody.velocity.y);
@@ -47,5 +49,15 @@ public class HeroPhysicsController : MonoBehaviour
 	private void OnCollisionExit2D(Collision2D other)
 	{
 		IsGrounded = false;
+	}
+
+	private void OnTriggerEnter2D(Collider2D other)
+	{
+		Interactable = other.gameObject.GetComponent<InteractableObject>();
+	}
+
+	private void OnTriggerExit2D(Collider2D other)
+	{
+		Interactable = null;
 	}
 }

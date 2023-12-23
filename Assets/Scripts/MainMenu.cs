@@ -43,14 +43,14 @@ public class MainMenu : MonoBehaviour
 		if (_settings.Visible)
 		{
 			transform.DOMove(new Vector3(transform.position.x + Screen.width/2, transform.position.y, transform.position.z),
-			_animationTime);
+				_animationTime);
 			_settings.Hide();
 		}
 		else
 		{
 			transform.DOMove(new Vector3(transform.position.x - Screen.width/2, transform.position.y, transform.position.z),
-			_animationTime);
-		_settings.Show();
+				_animationTime);
+			_settings.Show();
 		}
 	}
 

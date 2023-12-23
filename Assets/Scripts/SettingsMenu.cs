@@ -6,13 +6,11 @@ public class SettingsMenu : MonoBehaviour
 {
 	[SerializeField] private GameObject[] _buttons;
 
-	private bool _visible;
-
-	public bool Visible => _visible;
-
 	public UnityAction DefaultButtonClicked;
 	public UnityAction MuteButtonCLicked;
 	public UnityAction NoSoundButtonClicked;
+
+	public bool Visible { get; private set; }
 
 	private void Start()
 	{
@@ -26,7 +24,7 @@ public class SettingsMenu : MonoBehaviour
 			button.transform.DOScale(Vector3.one, immediately ? 0.0f : 0.2f);
 		}
 
-		_visible = true;
+		Visible = true;
 	}
 
 	public void Hide(bool immediately = false)
@@ -36,7 +34,7 @@ public class SettingsMenu : MonoBehaviour
 			button.transform.DOScale(Vector3.zero, immediately ? 0.0f : 0.2f);
 		}
 
-		_visible = false;
+		Visible = false;
 	}
 
 	public void OnMuteClick()

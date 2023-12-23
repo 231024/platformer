@@ -1,48 +1,44 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class HealthBandit : MonoBehaviour
 {
-    [SerializeField] private float _amountHealth = 0.0f;
-    [SerializeField] private Animator _animator;
+	private static readonly int Death = Animator.StringToHash("Death");
+	private static readonly int Hurt = Animator.StringToHash("Hurt");
 
-    private string _animationHurt = "Hurt";
-    private string _animationDeath = "Death";
+	[SerializeField] private float _amountHealth;
+	[SerializeField] private Animator _animator;
 
+	private void Update()
+	{
+		if (_amountHealth <= 0.0f)
+		{
+			PlayDeathAnimation();
+			Destroy(gameObject, 3);
+		}
+	}
 
-    void Update()
-    {
-        if(_amountHealth <= 0.0f)
-        {
-            PlayDeathAnimation();
-            Destroy(gameObject, 3);
-        }
-    }
+	private void OnCollisionEnter2D(Collision2D other)
+	{
+		if (other.gameObject.GetComponentInChildren<Damage>() != null)
+		{
+			DecreaseHealth(other.gameObject.GetComponentInChildren<Damage>().AmountDamage);
+			PlayHurthAnimation();
+			Destroy(other.gameObject.GetComponentInChildren<Damage>().gameObject);
+		}
+	}
 
-    private void DecreaseHealth(float _damage) 
-    {
-        _amountHealth -= _damage;
-    }
+	private void DecreaseHealth(float damage)
+	{
+		_amountHealth -= damage;
+	}
 
-    private void PlayHurthAnimation() 
-    {
-        _animator.SetTrigger(_animationHurt);
-    }
+	private void PlayHurthAnimation()
+	{
+		_animator.SetTrigger(Hurt);
+	}
 
-    private void PlayDeathAnimation() 
-    {
-        _animator.SetTrigger(_animationDeath);
-    }
-
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        if (other.gameObject.GetComponentInChildren<Damage>() != null)
-        {
-            DecreaseHealth(other.gameObject.GetComponentInChildren<Damage>().AmountDamage);
-            PlayHurthAnimation();
-            Destroy(other.gameObject.GetComponentInChildren<Damage>().gameObject);
-        }
-    }
+	private void PlayDeathAnimation()
+	{
+		_animator.SetTrigger(Death);
+	}
 }
