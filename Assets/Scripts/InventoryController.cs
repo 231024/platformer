@@ -5,10 +5,12 @@ using UnityEngine.Events;
 public class InventoryController : MonoBehaviour
 {
 	private readonly List<Apple> _apples = new();
-	public UnityAction ApplesCountChanged;
-	public UnityAction<int> OnAppleEat;
+
 	public int ApplesCount => _apples.Count;
 	public int MaxItemCount => 10;
+
+	public event UnityAction ApplesCountChanged;
+	public event UnityAction<int> OnAppleEat;
 
 	public void AddApples(Apple apple)
 	{

@@ -1,35 +1,22 @@
+using System;
 using DG.Tweening;
 using UnityEngine;
 
-public class MainMenu : MonoBehaviour
+public class MainMenu : BaseMenu
 {
 	[SerializeField] private RectTransform _menuButton;
-	[SerializeField] private RectTransform[] _buttons;
 	[SerializeField] private SettingsMenu _settings;
 	[SerializeField] private float _animationTime;
 
-	private void Start()
+	public override void Show(bool immediately = false)
 	{
-		Hide();
-	}
-
-	private void Show(bool immediately = false)
-	{
-		foreach (var button in _buttons)
-		{
-			button.DOScale(Vector3.one, immediately ? 0.0f : _animationTime);
-		}
-
+		base.Show(immediately);
 		_menuButton.DOScale(Vector3.zero, immediately ? 0.0f : _animationTime);
 	}
 
-	private void Hide(bool immediately = false)
+	public override void Hide(bool immediately = false)
 	{
-		foreach (var button in _buttons)
-		{
-			button.DOScale(Vector3.zero, immediately ? 0.0f : _animationTime);
-		}
-
+		base.Hide(immediately);
 		_menuButton.DOScale(Vector3.one, immediately ? 0.0f : _animationTime);
 	}
 
@@ -40,17 +27,23 @@ public class MainMenu : MonoBehaviour
 
 	public void OnSettingsButtonClick()
 	{
+		var halfScreen = Screen.width / 2;
+		var pos = transform.position;
+
 		if (_settings.Visible)
 		{
-			transform.DOMove(new Vector3(transform.position.x + Screen.width/2, transform.position.y, transform.position.z),
+			transform.DOMove(
+				new Vector3(pos.x + halfScreen, pos.y, pos.z),
 				_animationTime);
 			_settings.Hide();
 		}
 		else
 		{
-			transform.DOMove(new Vector3(transform.position.x - Screen.width/2, transform.position.y, transform.position.z),
+			transform.DOMove(
+				new Vector3(pos.x - halfScreen, pos.y, pos.z),
 				_animationTime);
 			_settings.Show();
+			// _settings.OnHideComplete = () => {  }
 		}
 	}
 

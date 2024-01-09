@@ -15,7 +15,7 @@ public class HeroAnimationController : MonoBehaviour
 	[SerializeField] private HeroPhysicsController _physics;
 	[SerializeField] private SpriteRenderer _renderer;
 	[SerializeField] private ParticleSystem _particles;
-	[SerializeField] private Transform _capsule;
+	[SerializeField] private Transform _damageSpawnPoint;
 	[SerializeField] private Damage _damage;
 
 	public UnityAction IsDamageObjectInstantiated;
@@ -35,12 +35,12 @@ public class HeroAnimationController : MonoBehaviour
 		if (_input.HAxisValue > 0.0f)
 		{
 			_renderer.flipX = false;
-			_capsule.DOScaleX(1.0f, 0.0f);
+			_damageSpawnPoint.DOScaleX(1.0f, 0.0f);
 		}
 		else if (_input.HAxisValue < 0.0f)
 		{
 			_renderer.flipX = true;
-			_capsule.DOScaleX(-1.0f, 0.0f);
+			_damageSpawnPoint.DOScaleX(-1.0f, 0.0f);
 		}
 
 		if (_input.IsJumpPressed)
@@ -51,7 +51,7 @@ public class HeroAnimationController : MonoBehaviour
 		if (_input.IsAttackPressed)
 		{
 			_animator.SetTrigger(Hit);
-			Instantiate(_damage, _capsule);
+			Instantiate(_damage, _damageSpawnPoint.position, _damageSpawnPoint.rotation);
 			IsDamageObjectInstantiated.Invoke();
 		}
 	}

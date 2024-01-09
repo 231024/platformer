@@ -32,11 +32,6 @@ public class HeroHp : MonoBehaviour
 		}
 	}
 
-	private void IncreaseHp()
-	{
-		IncreaseHp(10);
-	}
-
 	private void IncreaseHp(int value)
 	{
 		_currentHp += value;

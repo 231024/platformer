@@ -5,18 +5,13 @@ public class Apple : MonoBehaviour
 {
 	[SerializeField] private float _animationTime;
 	[SerializeField] private int _healthAmount;
-	private Transform _target;
 
 	public int HealthAmount => _healthAmount;
-
-	private void Start()
-	{
-		_target = FindObjectOfType<HudController>().ApplesMagnet;
-	}
+	public Vector3 TargetPos { get; set; }
 
 	private void OnCollisionEnter2D(Collision2D other)
 	{
-		if (other.gameObject.GetComponent<HeroPhysicsController>() != null)
+		if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
 		{
 			AppleFlight();
 			var invCon = FindObjectOfType<InventoryController>();
@@ -26,14 +21,8 @@ public class Apple : MonoBehaviour
 
 	private void AppleFlight()
 	{
-		var hudPos = Camera.main.ScreenToWorldPoint(_target.position);
 		var seq = DOTween.Sequence();
-		seq.Append(transform.DOMove(hudPos, _animationTime));
-		seq.AppendCallback(SelfDestroy);
-	}
-
-	private void SelfDestroy()
-	{
-		Destroy(gameObject);
+		seq.Append(transform.DOMove(TargetPos, _animationTime));
+		seq.AppendCallback(() => { Destroy(gameObject); });
 	}
 }
