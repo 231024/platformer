@@ -1,17 +1,17 @@
+using System;
 using UnityEngine;
 
 public class HeroHp : MonoBehaviour
 {
-	private const string HeroHpKey = "HeroHpKey";
-
 	[SerializeField] private int _heroMaxHp;
 	[SerializeField] private InventoryController _inventoryController;
-
-	private int _currentHp;
+	
+	private int _hp;
 
 	private void Awake()
 	{
-		_currentHp = GetPlayerPrefs(HeroHpKey);
+		_inventoryController = FindObjectOfType<InventoryController>();
+		_hp = _heroMaxHp;
 	}
 
 	private void OnEnable()
@@ -26,44 +26,26 @@ public class HeroHp : MonoBehaviour
 
 	private void OnCollisionEnter2D(Collision2D collision)
 	{
-		if (collision.gameObject.GetComponent<Damage>())
-		{
-			DecreaseHp(5);
-		}
+		DecreaseHp(5);
 	}
 
 	private void IncreaseHp(int value)
 	{
-		_currentHp += value;
+		_hp += value;
 
-		if (_currentHp >= _heroMaxHp)
+		if (_hp >= _heroMaxHp)
 		{
-			_currentHp = _heroMaxHp;
+			_hp = _heroMaxHp;
 		}
-
-		SavePlayerPrefs(HeroHpKey, _currentHp);
 	}
 
 	private void DecreaseHp(int value)
 	{
-		_currentHp -= value;
+		_hp -= value;
 
-		if (_currentHp <= 0)
+		if (_hp <= 0)
 		{
-			_currentHp = 0;
+			_hp = 0;
 		}
-
-		SavePlayerPrefs(HeroHpKey, _currentHp);
-	}
-
-	private void SavePlayerPrefs(string key, int value)
-	{
-		PlayerPrefs.SetInt(key, value);
-		PlayerPrefs.Save();
-	}
-
-	private int GetPlayerPrefs(string key)
-	{
-		return PlayerPrefs.HasKey(key) ? PlayerPrefs.GetInt(key) : _heroMaxHp;
 	}
 }

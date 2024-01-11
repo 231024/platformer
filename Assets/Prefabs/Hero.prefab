@@ -102,6 +102,7 @@ GameObject:
   - component: {fileID: 463668899035261619}
   - component: {fileID: 4795031296706442076}
   - component: {fileID: 3507005920175226328}
+  - component: {fileID: 7413847838767099396}
   m_Layer: 6
   m_Name: Hero
   m_TagString: Player
@@ -606,6 +607,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _physics: {fileID: 8714969824211535597}
   _animation: {fileID: 102270148273625432}
+  _data:
+    _isEnabled: 0
+    _name: 
+    _position:
+      _x: 0
+      _y: 0
+      _z: 0
 --- !u!114 &248237214700666155
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -649,6 +657,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _heroMaxHp: 100
   _inventoryController: {fileID: 0}
+  _save:
+    Health: 0
+    Position: {x: 0, y: 0, z: 0}
 --- !u!70 &3507005920175226328
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -684,6 +695,21 @@ CapsuleCollider2D:
   m_Offset: {x: -0.03, y: 0.7}
   m_Size: {x: 0.83, y: 1.35}
   m_Direction: 0
+--- !u!114 &7413847838767099396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1015681188568320679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 537446a1a66bf49e197ae2f79d61e6c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _saveData:
+    Health: 0
+    Position: {x: 0, y: 0, z: 0}
 --- !u!1 &2836300169742945334
 GameObject:
   m_ObjectHideFlags: 0

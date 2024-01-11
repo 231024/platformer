@@ -1,4 +1,3 @@
-using System;
 using DG.Tweening;
 using UnityEngine;
 
@@ -6,6 +5,7 @@ public class MainMenu : BaseMenu
 {
 	[SerializeField] private RectTransform _menuButton;
 	[SerializeField] private SettingsMenu _settings;
+	[SerializeField] private Game _game;
 	[SerializeField] private float _animationTime;
 
 	public override void Show(bool immediately = false)
@@ -45,6 +45,11 @@ public class MainMenu : BaseMenu
 			_settings.Show();
 			// _settings.OnHideComplete = () => {  }
 		}
+	}
+
+	public void OnSaveButtonClick()
+	{
+		_game.Save();
 	}
 
 	public void OnMenuButtonClick()
