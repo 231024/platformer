@@ -5,10 +5,11 @@ public class Game : MonoBehaviour
 {
 	[SerializeField] private CinemachineVirtualCamera _cam;
 	[SerializeField] private Hero _heroPrefab;
-	private Hero _hero;
 
 	private GameSave _save;
 	private ISave<GameSave> _saver;
+
+	public Hero Hero { get; private set; }
 
 	private void Awake()
 	{
@@ -21,9 +22,9 @@ public class Game : MonoBehaviour
 			_save.Position = new Vector3(-75, 10, 0);
 		}
 
-		_hero = Instantiate(_heroPrefab, _save.Position, Quaternion.identity);
+		Hero = Instantiate(_heroPrefab, _save.Position, Quaternion.identity);
 
-		_cam.Follow = _hero.transform;
+		_cam.Follow = Hero.transform;
 	}
 
 	public void StartNew()
@@ -32,7 +33,7 @@ public class Game : MonoBehaviour
 
 	public void Save()
 	{
-		_save.Position = _hero.transform.position;
+		_save.Position = Hero.transform.position;
 		_saver.Save(_save);
 	}
 
